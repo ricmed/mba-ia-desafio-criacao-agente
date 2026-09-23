@@ -279,7 +279,7 @@ cp .env.example .env
 |---|---|---|
 | `GOOGLE_API_KEY` | sim | Chave do Google AI Studio. |
 | `GOOGLE_GENAI_USE_VERTEXAI` | não | `FALSE` para usar a Gemini Developer API (padrão do `.env.example`). |
-| `AURORA_MODELO` | não | Modelo Gemini dos agentes. Padrão: `gemini-2.5-flash`. |
+| `AURORA_MODELO` | não | Modelo Gemini dos agentes. Padrão: `gemini-3.6-flash`. |
 | `AURORA_DB_DIR` | não | Onde ficam os bancos SQLite. Padrão: `var`. |
 | `AURORA_HOST` / `AURORA_PORT` | não | Endereço da API. Padrão: `127.0.0.1:8000`. |
 

@@ -35,4 +35,4 @@ def caminho_banco_sessoes() -> Path:
 
 
 def modelo_padrao() -> str:
-    return os.getenv("AURORA_MODELO", "gemini-2.5-flash")
+    return os.getenv("AURORA_MODELO", "gemini-3.6-flash")
