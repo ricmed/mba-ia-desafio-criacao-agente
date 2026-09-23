@@ -328,9 +328,26 @@ curl -s -X POST localhost:8000/sessoes/$SID/mensagens -H 'Content-Type: applicat
 ### Desenvolvimento
 
 ```bash
-uv run adk web src/aurora
+uv run adk web --port 8080 src
 ```
 
-Útil para ver transferências, chamadas de tool e pedidos de confirmação
-acontecendo. A API é o alvo da entrega; o `adk web` é só ferramenta de
-inspeção.
+Aponta para `src`, não para `src/aurora`: o carregador do `adk web` importa a
+pasta do agente como módulo de topo, então o módulo precisa ser o pacote
+`aurora` inteiro para os imports relativos continuarem válidos. O ponto de
+entrada é `src/aurora/agent.py`.
+
+A sessão criada pelo Dev UI nasce sem apartamento, e as tools leem o
+apartamento do `state`. Crie uma já vinculada antes de conversar (o Dev UI usa
+o usuário `user`):
+
+```bash
+curl -X POST http://localhost:8080/apps/aurora/users/user/sessions   -H 'Content-Type: application/json'   -d '{"state": {"apartamento": "101", "morador": "Helena Prado"}}'
+```
+
+Depois é só escolhê-la em **NEW SESSION → (id da sessão)**. A timeline mostra o
+`transfer_to_agent`, a chamada de `reservar_area`, o `adk_request_confirmation`
+com a dica e o payload, e a retomada depois do **Submit**.
+
+O `adk web` usa a sessão em memória dele, mas grava no mesmo
+`var/condominio.db` da API — rode `uv run restaurar-dados` depois de brincar
+por lá. A API é o alvo da entrega; o `adk web` é só ferramenta de inspeção.
